@@ -1,5 +1,5 @@
 require 'dradis/pdf_export/actions'
-require 'dradis/pdf_export/processor'
+require 'dradis/pdf_export/exporter'
 require 'dradis/pdf_export/version'
 
 module Dradis
