@@ -3,22 +3,23 @@ module Dradis
     module PdfExport
 
       class Processor < Prawn::Document
-        def initialize(params={})
+        def initialize(args={})
           super(top_margin: 70)
 
-          category_name = params.fetch(:category_name, 'PDF ready')
-          category_name = params.fetch(:category_name, 'HTMLExport ready')
-          reporting_cat = Category.find_by_name(category_name)
-          reporting_notes_num = Note.count(:all, conditions: {category_id: reporting_cat})
+          @category = args.fetch(:category, Dradis::Core::Category.report)
+          reporting_notes_num = Dradis::Core::Note.where(category_id: @category).count
           @author = 'Security Tester'
           @email = 'tester@securitytesting.com'
-          @title = "Dradis Framework - v#{Core::VERSION::STRING}"
-          @notes = Note.find(:all, conditions: {category_id: reporting_cat} )
-          sort_notes
+          @title = "Dradis Framework - v#{Dradis::Core::version}"
+          @notes = Dradis::Core::Note.where(category_id: @category)
+
+          @issues = Dradis::Core::Issue.find(Dradis::Core::Node.issue_library.notes.pluck(:id))
+          sort_issues
         end
 
         def generate
           cover_page
+          project_notes
           summary_of_findings
           detailed_findings
           tool_list
@@ -27,19 +28,19 @@ module Dradis
         end
 
         private
-        def sort_notes
-          sorted = { :info => [], :low => [], :medium => [], :high => []}
-          for note in @notes;
-             cvss = note.fields['CVSSv2'].to_f;
+        def sort_issues
+          sorted = { info: [], low: [], medium: [], high: []}
+          @issues.each do |issue|
+             cvss = issue.fields['CVSSv2'].to_f;
              case cvss
                when 0..0.9
-                 sorted[:info] << note
+                 sorted[:info] << issue
                when 1.0..3.9
-                 sorted[:low] << note
+                 sorted[:low] << issue
                when 4.0..6.9
-                 sorted[:medium] << note
+                 sorted[:medium] << issue
                else
-                 sorted[:high] << note
+                 sorted[:high] << issue
              end
            end
            @sorted = sorted[:high] + sorted[:medium] + sorted[:low] + sorted[:info]
@@ -47,12 +48,12 @@ module Dradis
 
         def cover_page
           move_down 50
-          image "#{Rails.root}/app/assets/images/logo_small.jpg", position: :center
+          image "#{Rails.root}/app/assets/images/dradis-logo1.png", position: :center
           move_down 20
 
           text '<b><font size="24">Security Assessment Report</font></b>', inline_format: true, align: :center
           move_down 20
-          text "RootedCON 2014", align: :center
+          text "BlackHat Arsenal 2014", align: :center
 
 
           bounding_box([300, 150], :width => 200, :height => 150) do
@@ -62,6 +63,21 @@ module Dradis
             text "<b>Date</b>: #{Time.now.strftime('%Y-%m-%d')}", inline_format: :true
             # transparent(0.5) { stroke_bounds }  # And this will stroke on the next
           end
+          start_new_page
+        end
+
+        def project_notes
+          draw_header
+
+          text "Project notes (in the [#{@category.name}] category)"
+          move_down 20
+
+          @notes.each do |note|
+            fields = note.fields
+            text "<b>#{fields['Title']}</b>", inline_format: true
+            text fields['Description']
+          end
+
           start_new_page
         end
 
@@ -142,6 +158,13 @@ module Dradis
 
       end
 
+      class Exporter
+        def export(args={})
+          pdf = Processor.new(args)
+          pdf.generate
+          pdf
+        end
+      end
     end
   end
 end
