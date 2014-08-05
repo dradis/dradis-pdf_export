@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/dradis/pdf_export/version', __FILE__)
+require File.expand_path('../lib/dradis/plugins/pdf_export/version', __FILE__)
 version = Dradis::Plugins::PdfExport::version
 
 Gem::Specification.new do |spec|
