@@ -1,14 +1,12 @@
-module Dradis
-  module PdfExport
-    module VERSION #:nodoc:
-      MAJOR = 3
-      MINOR = 0
-      TINY = 0
-      PRE = "beta"
+require_relative 'gem_version'
 
-      STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
-      def self.to_s
-        STRING
+module Dradis
+  module Plugins
+    module PdfExport
+      # Returns the version of the currently loaded HtmlExport as a
+      # <tt>Gem::Version</tt>.
+      def self.version
+        gem_version
       end
     end
   end
