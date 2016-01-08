@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # gem.add_dependency 'dradis_core', version
-  spec.add_dependency 'dradis-plugins', '~> 3.2'
+  spec.add_dependency 'dradis-plugins', '~> 3.4.1'
   spec.add_dependency 'prawn', '~> 0.15.0'
 
   spec.add_development_dependency 'capybara', '~> 1.1.3'
