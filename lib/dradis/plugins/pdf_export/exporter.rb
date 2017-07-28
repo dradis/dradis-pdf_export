@@ -6,14 +6,14 @@ module Dradis
         def initialize(args={})
           super(top_margin: 70)
 
-          @category = args.fetch(:category, Dradis::Core::Category.report)
-          reporting_notes_num = Dradis::Core::Note.where(category_id: @category).count
+          @category = args.fetch(:category, Category.report)
+          reporting_notes_num = Note.where(category_id: @category).count
           @author = 'Security Tester'
           @email = 'tester@securitytesting.com'
-          @title = "Dradis Framework - v#{Dradis::Core::version}"
-          @notes = Dradis::Core::Note.where(category_id: @category)
+          @title = "Dradis Framework - v#{Dradis::CE::VERSION}"
+          @notes = Note.where(category_id: @category)
 
-          @issues = Dradis::Core::Issue.find(Dradis::Core::Node.issue_library.notes.pluck(:id))
+          @issues = Issue.find(Node.issue_library.notes.pluck(:id))
           sort_issues
         end
 
@@ -48,15 +48,15 @@ module Dradis
 
         def cover_page
           move_down 50
-          image "#{Rails.root}/app/assets/images/dradis-logo1.png", position: :center
+          # image "#{Rails.root}/app/assets/images/profile.png", position: :center
           move_down 20
 
           text '<b><font size="24">Security Assessment Report</font></b>', inline_format: true, align: :center
           move_down 20
-          text "BlackHat Arsenal 2014", align: :center
+          text "BlackHat Arsenal 2017", align: :center
 
 
-          bounding_box([300, 150], :width => 200, :height => 150) do
+          bounding_box([300, 150], width: 200, height: 150) do
             # transparent(0.5) { stroke_bounds }  # This will stroke on one page
             text "<b>Author</b>: #{@author}", inline_format: :true
             text "<b>Email</b>: #{@email}", inline_format: :true
@@ -158,9 +158,9 @@ module Dradis
 
       end
 
-      class Exporter
-        def export(args={})
-          pdf = Processor.new(args)
+      class Exporter < Dradis::Plugins::Export::Base
+        def export()
+          pdf = Processor.new(options)
           pdf.generate
           pdf
         end
