@@ -49,7 +49,7 @@ module Dradis
 
         def cover_page
           move_down 50
-          # image "#{Rails.root}/app/assets/images/profile.png", position: :center
+          image "#{Engine.config.paths['app/assets'].expanded.first}/logo_pdf.jpg", position: :center
           move_down 20
 
           text '<b><font size="24">Security Assessment Report</font></b>', inline_format: true, align: :center
