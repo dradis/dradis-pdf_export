@@ -4,16 +4,15 @@ module Dradis
 
       class Processor < Prawn::Document
         def initialize(args={})
-
-          content_service = args.delete(:content_service)
-
           super(top_margin: 70)
+
+          content_service = args[:content_service]
 
           @author = 'Security Tester'
           @email  = 'tester@securitytesting.com'
           @issues = content_service.all_issues
           @notes  = content_service.all_notes
-          @title  = "Dradis Framework - v#{Dradis::Core::version}"
+          @title  = "Dradis Framework - v#{Dradis::CE::VERSION::STRING}"
 
           sort_issues
         end
@@ -70,7 +69,7 @@ module Dradis
         def project_notes
           draw_header
 
-          text "Project notes (in the [#{@category.name}] category)"
+          text 'Project notes'
           move_down 20
 
           @notes.each do |note|
@@ -161,7 +160,7 @@ module Dradis
 
       class Exporter < Dradis::Plugins::Export::Base
         def export()
-          pdf = Processor.new(options)
+          pdf = Processor.new(content_service: content_service)
           pdf.generate
           pdf
         end
