@@ -4,16 +4,17 @@ module Dradis
 
       class Processor < Prawn::Document
         def initialize(args={})
+
+          content_service = args.delete(:content_service)
+
           super(top_margin: 70)
 
-          @category = args.fetch(:category, Category.report)
-          reporting_notes_num = Note.where(category_id: @category).count
           @author = 'Security Tester'
-          @email = 'tester@securitytesting.com'
-          @title = "Dradis Framework - v#{Dradis::CE::VERSION}"
-          @notes = Note.where(category_id: @category)
+          @email  = 'tester@securitytesting.com'
+          @issues = content_service.all_issues
+          @notes  = content_service.all_notes
+          @title  = "Dradis Framework - v#{Dradis::Core::version}"
 
-          @issues = Issue.find(Node.issue_library.notes.pluck(:id))
           sort_issues
         end
 
@@ -53,7 +54,7 @@ module Dradis
 
           text '<b><font size="24">Security Assessment Report</font></b>', inline_format: true, align: :center
           move_down 20
-          text "BlackHat Arsenal 2017", align: :center
+          text "BlackHat Arsenal 2018", align: :center
 
 
           bounding_box([300, 150], width: 200, height: 150) do
