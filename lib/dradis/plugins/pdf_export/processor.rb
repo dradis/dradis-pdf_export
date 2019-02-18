@@ -22,8 +22,6 @@ module Dradis
           summary_of_findings
           detailed_findings
           tool_list
-
-          # outline
         end
 
         private
@@ -56,11 +54,9 @@ module Dradis
 
 
           bounding_box([300, 150], width: 200, height: 150) do
-            # transparent(0.5) { stroke_bounds }  # This will stroke on one page
             text "<b>Author</b>: #{@author}", inline_format: :true
             text "<b>Email</b>: #{@email}", inline_format: :true
             text "<b>Date</b>: #{Time.now.strftime('%Y-%m-%d')}", inline_format: :true
-            # transparent(0.5) { stroke_bounds }  # And this will stroke on the next
           end
           start_new_page
         end
@@ -125,15 +121,6 @@ module Dradis
           data << ['Dradis Framework', "Collaboration and reporting framework\nhttp://dradisframework.org" ]
 
           table data, header: true, position: :center
-        end
-
-        def outline
-          outline.define do
-            section('Report Content', destination: 2) do
-              page title: 'Summary of Findings', destination: 2
-              page title: 'Tool List', destination: 3
-            end
-          end
         end
 
         def draw_header
