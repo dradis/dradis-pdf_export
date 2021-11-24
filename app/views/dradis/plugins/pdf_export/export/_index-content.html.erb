@@ -1,0 +1,13 @@
+<%= content_tag :div, id: 'plugin-pdf_export', class: 'tab-pane fade' do %>
+
+  <h4>Generate a custom PDF report</h4>
+
+  To customize the PDF structure, see the <a href="https://dradisframework.com/support/guides/reporting/pdf_reports.html" target="_blank">Creating PDF reports</a> guide.
+
+  <%= form_tag project_export_manager_path(current_project), target: '_blank' do %>
+    <%= hidden_field_tag :plugin, :pdf_export %>
+    <%= hidden_field_tag :route, :root %>
+
+    <button id="export-button" class="btn btn-lg btn-primary mt-4">Export</button>
+  <% end %>
+<% end%>
