@@ -5,7 +5,6 @@ class PdfExportTasks < Thor
 
   desc 'export', 'export the current repository structure as PDF document'
   method_option :output,   required: false, type: :string, desc: "the report file to create (if ends in .pdf), or directory to create it in"
-  # method_option :template, required: true, type: :string, desc: "the template file to use. If not provided the value of the 'advanced_word_export:docx' setting will be used."
 
   def export
     require 'config/environment'
@@ -25,11 +24,6 @@ class PdfExportTasks < Thor
 
       report_path = File.join(report_path, report_filename)
     end
-
-    # if template = options.template
-    #   shell.error("Template file doesn't exist") && exit(1) unless File.exists?(template)
-    #   task_options[:template] = template
-    # end
 
     detect_and_set_project_scope
 
