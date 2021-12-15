@@ -1,10 +1,10 @@
 class PdfExportTasks < Thor
   include Rails.application.config.dradis.thor_helper_module
 
-  namespace     "dradis:plugins:pdf"
+  namespace 'dradis:plugins:pdf'
 
   desc 'export', 'export the current repository structure as PDF document'
-  method_option :output,   required: false, type: :string, desc: "the report file to create (if ends in .pdf), or directory to create it in"
+  method_option :output,   required: false, type: :string, desc: 'the report file to create (if ends in .pdf), or directory to create it in'
 
   def export
     require 'config/environment'
@@ -14,7 +14,7 @@ class PdfExportTasks < Thor
 
     report_path = options.output || Rails.root
     unless report_path.to_s =~ /\.pdf\z/
-      date = DateTime.now.strftime("%Y-%m-%d")
+      date = DateTime.now.strftime('%Y-%m-%d')
       base_filename = "dradis-report_#{date}.pdf"
 
       report_filename = NamingService.name_file(
