@@ -1,4 +1,4 @@
-v4.2.0 (Xxx 2022)
+v4.2.0 (February 2022)
   - Add Thor task for console export.
   - Add view hook for Export#index
 
