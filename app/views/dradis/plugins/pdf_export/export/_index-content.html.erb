@@ -8,6 +8,8 @@
     <%= hidden_field_tag :plugin, :pdf_export %>
     <%= hidden_field_tag :route, :root %>
 
-    <%= render partial: 'export/submit_button', locals: { plugin_name: Dradis::Plugins::PdfExport::Engine.plugin_name } %>
+    <div class="mt-4">
+      <%= render partial: 'export/submit_button', locals: { plugin_name: Dradis::Plugins::PdfExport::Engine.plugin_name } %>
+    </div>
   <% end %>
 <% end%>
