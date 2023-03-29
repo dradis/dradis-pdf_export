@@ -5,9 +5,7 @@ module Dradis
         # This method cycles throw the notes in the reporting category and creates
         # a simple PDF report with them.
         def index
-          exporter = Dradis::Plugins::PdfExport::Exporter.new(
-            export_options.merge(scope: @scope.to_sym)
-          )
+          exporter = Dradis::Plugins::PdfExport::Exporter.new(export_params)
           pdf = exporter.export
 
           send_data pdf.render, filename: "dradis_report-#{Time.now.to_i}.pdf",
