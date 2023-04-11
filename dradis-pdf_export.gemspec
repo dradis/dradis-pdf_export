@@ -20,13 +20,13 @@ Gem::Specification.new do |spec|
   spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'dradis-plugins', '~> 4.0'
+  spec.add_dependency 'dradis-plugins', '>= 4.8.0'
   spec.add_dependency 'prawn', '~> 0.15.0'
 
   spec.add_development_dependency 'capybara', '~> 1.1.3'
   spec.add_development_dependency 'database_cleaner'
   spec.add_development_dependency 'factory_girl_rails'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rake', '>= 12.3.3'
   spec.add_development_dependency 'rspec-rails', '~> 2.11.0'
   spec.add_development_dependency 'sqlite3'
 end
