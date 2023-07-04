@@ -1,5 +1,6 @@
 v4.10.0 (Month 2023)
   - Update views for compatibility with Font Awesome 6
+  - Update forms for compatibility with the Dradis export changes
 
 v4.9.0 (Month 2023)
   - Update views for compatibility with Bootstrap 5
