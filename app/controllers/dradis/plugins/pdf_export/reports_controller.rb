@@ -1,7 +1,7 @@
 module Dradis
   module Plugins
     module PdfExport
-      class ExportsController < Dradis::Plugins::Export::BaseController
+      class ReportsController < Dradis::Plugins::Export::BaseController
         skip_before_action :validate_template
 
         # This method cycles throw the notes in the reporting category and creates

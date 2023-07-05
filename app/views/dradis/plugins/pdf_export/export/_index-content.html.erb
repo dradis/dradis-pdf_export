@@ -4,7 +4,7 @@
 
   To customize the PDF structure, see the <a href="https://dradisframework.com/support/guides/reporting/pdf_reports.html" target="_blank">Creating PDF reports</a> guide.
 
-  <%= form_tag pdf_export.project_export_path(current_project) do %>
+  <%= form_tag pdf_export.project_report_path(current_project), target: '_blank' do %>
     <div class="mt-4">
       <%= render partial: 'export/submit_button', locals: { plugin_name: Dradis::Plugins::PdfExport::Engine.plugin_name } %>
     </div>
