@@ -19,7 +19,7 @@ module Dradis
 
         initializer 'dradis-pdf_export.mount_engine' do
           Rails.application.routes.append do
-            mount Dradis::Plugins::PdfExport::Engine => '/export/pdf', as: :pdf_export
+            mount Dradis::Plugins::PdfExport::Engine => '/', as: :pdf_export
           end
         end
       end
