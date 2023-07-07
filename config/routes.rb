@@ -1,5 +1,5 @@
 Dradis::Plugins::PdfExport::Engine.routes.draw do
   resources :projects, only: [] do
-    resource :report, only: [:create], path: '/export/pdf'
+    resource :report, only: [:create], path: '/export/pdf/reports'
   end
 end
