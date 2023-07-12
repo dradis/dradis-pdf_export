@@ -1,10 +1,12 @@
 module Dradis
   module Plugins
     module PdfExport
-      class BaseController < Dradis::Plugins::Export::BaseController
+      class ReportsController < Dradis::Plugins::Export::BaseController
+        skip_before_action :validate_template
+
         # This method cycles throw the notes in the reporting category and creates
         # a simple PDF report with them.
-        def index
+        def create
           exporter = Dradis::Plugins::PdfExport::Exporter.new(export_params)
           pdf = exporter.export
 

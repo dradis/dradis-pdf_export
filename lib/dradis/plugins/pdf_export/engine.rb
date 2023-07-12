@@ -1,7 +1,6 @@
 module Dradis
   module Plugins
     module PdfExport
-
       class Engine < ::Rails::Engine
         # Standard Rails Engine stuff
         isolate_namespace Dradis::Plugins::PdfExport
@@ -18,14 +17,12 @@ module Dradis
         provides :export
         description 'Generate PDF reports'
 
-
         initializer 'dradis-pdf_export.mount_engine' do
           Rails.application.routes.append do
-            mount Dradis::Plugins::PdfExport::Engine => '/export/pdf'
+            mount Dradis::Plugins::PdfExport::Engine => '/', as: :pdf_export
           end
         end
       end
-
     end
   end
 end

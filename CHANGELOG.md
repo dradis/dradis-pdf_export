@@ -1,4 +1,5 @@
 v4.10.0 (Month 2023)
+  - Implement handling of HTML exports directly from Tylium
   - Update views for compatibility with Font Awesome 6
 
 v4.9.0 (Month 2023)
