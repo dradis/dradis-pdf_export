@@ -1,24 +1,24 @@
 # -*- encoding: utf-8 -*-
+
 require File.expand_path('../lib/dradis/plugins/pdf_export/version', __FILE__)
 version = Dradis::Plugins::PdfExport::version
 
 Gem::Specification.new do |spec|
   spec.platform = Gem::Platform::RUBY
-  spec.name = "dradis-pdf_export"
+  spec.name = 'dradis-pdf_export'
   spec.version = version
   spec.required_ruby_version = '>= 1.9.3'
   spec.license = 'GPL-2'
 
   spec.authors = ['Daniel Martin']
-  spec.email = ["<etd@nomejortu.com>"]
-  spec.description = %q{Export to PDF plugin for the Dradis Framework}
-  spec.summary = %q{Dradis PDF export plugin}
-  spec.homepage = 'http://dradisframework.org'
+  spec.description = 'Export to PDF plugin for the Dradis Framework'
+  spec.summary = 'Dradis PDF export plugin'
+  spec.homepage = 'http://dradis.com'
 
   spec.files = `git ls-files`.split($\)
-  spec.executables = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  spec.executables = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
   spec.add_dependency 'dradis-plugins', '>= 4.8.0'
   spec.add_dependency 'prawn', '~> 0.15.0'
