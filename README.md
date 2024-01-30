@@ -7,8 +7,7 @@ This plugin generates a PDF report from the notes in your [Dradis Framework](htt
 
 It uses the amazing [Prawn](https://github.com/prawnpdf/prawn) library to do the PDF heavy lifting.
 
-The add-on requires [Dradis CE](https://dradisframework.org/) > 3.0, or [Dradis Pro](https://dradisframework.com/pro/).
-
+The add-on requires [Dradis CE](https://dradis.com/ce/) > 3.0, or [Dradis Pro](https://dradis.com/).
 
 ## More information
 
