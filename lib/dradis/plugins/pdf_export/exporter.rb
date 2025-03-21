@@ -1,12 +1,12 @@
 module Dradis
   module Plugins
     module PdfExport
+      class Processor
+        include Prawn::View
 
-      class Processor < Prawn::Document
         def initialize(args = {})
-          super(top_margin: 70)
-
           content_service = args[:content_service]
+          @document = Prawn::Document.new(top_margin: 70)
 
           @author = 'Security Tester'
           @email  = 'tester@securitytesting.com'
@@ -19,12 +19,12 @@ module Dradis
 
         def generate
           cover_page
-          project_notes
+          # project_notes
+
+          table_of_contents
           summary_of_findings
           detailed_findings
           tool_list
-
-          # outline
         end
 
         private
@@ -84,6 +84,10 @@ module Dradis
         def summary_of_findings
           draw_header
 
+          outline.add_subsection_to('Report Content') do
+            outline.page destination: page_number, title: 'Summary of Findings'
+          end
+
           text 'SUMMARY OF FINDINGS'
           move_down 20
 
@@ -97,6 +101,10 @@ module Dradis
 
         def detailed_findings
           draw_header
+
+          outline.add_subsection_to('Report Content') do
+            outline.page destination: page_number, title: 'Detailed Findings'
+          end
 
           text 'DETAILED FINDINGS'
           move_down 20
@@ -116,6 +124,10 @@ module Dradis
         def tool_list
           draw_header
 
+          outline.update do
+            page destination: page_number, title: 'Tools Used'
+          end
+
           text 'TOOLS USED'
           move_down 20
 
@@ -123,24 +135,21 @@ module Dradis
             ['Name', 'Description']
           ]
 
-          data << ['Dradis Framework', "Collaboration and reporting framework\nhttp://dradisframework.org" ]
+          data << ['Dradis Framework', "Collaboration and reporting framework\nhttps://dradis.com" ]
 
           table data, header: true, position: :center
         end
 
-        def outline
+        def table_of_contents
           outline.define do
-            section('Report Content', destination: 2) do
-              page title: 'Summary of Findings', destination: 2
-              page title: 'Tool List', destination: 3
-            end
+            section('Report Content')
           end
         end
 
         def draw_header
           fill_color 'efefef'
           fill_rectangle [bounds.left-50, bounds.top + 100], bounds.width + 100, 87
-          fill_color '00000'
+          fill_color '000000'
 
           box = bounding_box [bounds.left-50, bounds.top+50], :width  => (bounds.width + 100) do
 

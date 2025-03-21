@@ -21,7 +21,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'dradis-plugins', '>= 4.8.0'
-  spec.add_dependency 'prawn', '~> 0.15.0'
+  spec.add_dependency 'prawn', '~> 2.5'
+  spec.add_dependency 'prawn-table', '~> 0.2.2'
 
   spec.add_development_dependency 'capybara', '~> 1.1.3'
   spec.add_development_dependency 'database_cleaner'

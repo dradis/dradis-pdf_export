@@ -1,3 +1,8 @@
+v4.xx.x ()
+  - Add table of contents
+  - Update logo
+  - Upgraded gems: prawn, prawn-table
+
 v4.15.0 (December 2024)
   - No changes
 
