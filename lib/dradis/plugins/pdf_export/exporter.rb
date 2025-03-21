@@ -3,7 +3,7 @@ module Dradis
     module PdfExport
 
       class Processor < Prawn::Document
-        def initialize(args={})
+        def initialize(args = {})
           super(top_margin: 70)
 
           content_service = args[:content_service]
@@ -48,12 +48,12 @@ module Dradis
 
         def cover_page
           move_down 50
-          image "#{Engine.config.paths['app/assets'].expanded.first}/logo_pdf.jpg", position: :center
+          image "#{Engine.config.paths['app/assets'].expanded.first}/dradis_ce_full_sm.png", position: :center
           move_down 20
 
           text '<b><font size="24">Security Assessment Report</font></b>', inline_format: true, align: :center
           move_down 20
-          text "BlackHat Arsenal 2018", align: :center
+          text "BlackHat Arsenal 2025", align: :center
 
 
           bounding_box([300, 150], width: 200, height: 150) do
