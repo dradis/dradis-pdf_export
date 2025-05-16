@@ -1,4 +1,4 @@
-v4.xx.x ()
+v4.16.0 (May 2025)
   - Add table of contents
   - Update logo
   - Upgraded gems: prawn, prawn-table
